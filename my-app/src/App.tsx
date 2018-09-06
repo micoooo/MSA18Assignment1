@@ -1,32 +1,49 @@
-import * as React from 'react';
-import './App.css';
-import Form from "./components/Form"
-import Titles from "./components/Titles"
-import Weather from "./components/Weather"
+import * as React from 'react'
+import axios from 'axios'
+import AppBar from './components/AppBar'
+import FloatingActionButton from './components/FloatingActionButton'
+import WeatherCard from './components/WeatherCard'
 
-const API_KEY = "855dcc486ca0e07e59b3c6ffcac0fcd6";
+interface IState {
+  loading: any,
+  weather: any
+}
 
+class App extends React.Component<{}, IState> {
 
-class App extends React.Component {
   constructor(props:any) {
-    super(props);
-    this.getWeather = this.getWeather.bind(this)
+    super(props)
+    this.state = {
+      weather: [],
+      loading: true
+    }
   }
-  getWeather() {
-    console.log(this.props);
+
+  componentDidMount() {
+    axios.get('http://api.openweathermap.org/data/2.5/forecast/daily?q=Chicago&APPID=79badf94102e008963c2d50b6cfa43f2&units=metric&cnt=8')
+      .then(response => {
+        this.setState({
+          weather: response.data,
+          loading: false
+        })
+      })
+      .catch(error => {
+        console.log('Error fetching and parsing data', error)
+      })
   }
-  private getWeather = async (event:any) => {
-    event.preventDefault();
-    const apiCall = await fetch('https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_KEY}&units=metric');
-    const data = await apiCall.json();
-    console.log(data);
-  }
-  public render() {
+
+  render() {
     return (
-      <div className="App">
-        <Titles />
-        <Form getWeather={this.getWeather}/>
-        <Weather />
+      <div>
+        <AppBar />
+        <div>
+          {
+            (this.state.loading)
+              ? <p>Loading . . . </p>
+              : <WeatherCard data={this.state.weather} />
+          }
+        </div>
+        <FloatingActionButton />
       </div>
     );
   }

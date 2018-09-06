@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react'
 import { withStyles, createStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -12,9 +11,6 @@ import clear from '../images/Clear.png'
 import clouds from '../images/Cloudy.png'
 import extreme from '../images/Extreme.png'
 import defaultIcon from '../images/Partly-cloudy.png'
-
-
-
 
 const styleSheet = createStyles({
   flex: {
@@ -68,7 +64,7 @@ function CurrentWeather(props:any) {
       <div className={classes.flex}>
         <img src={`${weatherIcon}`} alt="WeatherIcon" />
         <Typography variant="display4"  >
-          {`${currentTemp}°`}
+        {`${currentTemp}°`}
         </Typography>
       </div>
     </div>

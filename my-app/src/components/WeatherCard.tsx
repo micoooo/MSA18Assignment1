@@ -66,9 +66,6 @@ function SimpleCard(props:any) {
           <div>
             <WeeklyWeather data={result.list} />
           </div>
-
-
-
         </CardContent>
       </Card>
     </div>

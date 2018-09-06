@@ -20,7 +20,7 @@ class App extends React.Component<{}, IState> {
   }
 
   public componentDidMount() {
-    axios.get('http://api.openweathermap.org/data/2.5/forecast/daily?q=Chicago&APPID=79badf94102e008963c2d50b6cfa43f2&units=metric&cnt=8')
+    axios.get('http://api.openweathermap.org/data/2.5/forecast/daily?q=Auckland&APPID=79badf94102e008963c2d50b6cfa43f2&units=metric&cnt=8')
       .then(response => {
         this.setState({
           weather: response.data,
@@ -43,7 +43,6 @@ class App extends React.Component<{}, IState> {
               : <WeatherCard data={this.state.weather} />
           }
         </div>
-        <FloatingActionButton />
       </div>
     );
   }

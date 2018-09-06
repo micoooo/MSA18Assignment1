@@ -18,8 +18,8 @@ const styleSheet = createStyles({
 function DailyWeather(props: any) {
   const result = props.data
   const date = new Date(result.dt * 1000)
-  let weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-  var weather = result.weather[0].main
+  const weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  const weather = result.weather[0].main
   let weatherIcon
   const maxTemp = Math.round(result.temp.max)
   const minTemp = Math.round(result.temp.min)

@@ -19,7 +19,7 @@ class App extends React.Component<{}, IState> {
     }
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     axios.get('http://api.openweathermap.org/data/2.5/forecast/daily?q=Chicago&APPID=79badf94102e008963c2d50b6cfa43f2&units=metric&cnt=8')
       .then(response => {
         this.setState({
@@ -32,7 +32,7 @@ class App extends React.Component<{}, IState> {
       })
   }
 
-  render() {
+  public render() {
     return (
       <div>
         <AppBar />

@@ -41,8 +41,8 @@ function SimpleCard(props:any) {
   const weatherDescription = capitalizeFirstLetter(result.list[0].weather[0].description)
   const now = new Date()
 
-  function capitalizeFirstLetter(string:any) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  function capitalizeFirstLetter(text:any) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
   }
 
   return (

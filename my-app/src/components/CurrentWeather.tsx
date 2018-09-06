@@ -25,7 +25,7 @@ function CurrentWeather(props:any) {
   const classes = props.classes
   const result = props.data
 
-  var weather = result.weather[0].main
+  const weather = result.weather[0].main
   let weatherIcon
 
   switch (weather) {

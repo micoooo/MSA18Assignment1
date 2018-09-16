@@ -15,7 +15,11 @@ const styleSheet = createStyles({
   flex: {
     flexGrow: 1,
   },
+  menuButton: {
+    
+  },
 });
+
 
 function SimpleAppBar(props:any) {
   const classes = props.classes;

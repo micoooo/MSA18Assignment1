@@ -14,7 +14,9 @@ function WeeklyWeather(props:any) {
   const classes = props.classes;
   const result = props.data
   let days
-  result.shift()
+
+/*   // Remove shift 
+  result.shift() */
 
   days = result.map((day:any) =>
     <DailyWeather data={day} key={day.dt} />

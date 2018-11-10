@@ -35,43 +35,57 @@ const styleSheet = (theme: any) => createStyles(({
 }));
 
 function SimpleCard(props: any) {
-  const classes = props.classes;
-  const result = props.data;
-  const cityName = result.city.name
-  const country = result.city.country
-  const today = new Date(result.list[0].dt * 1000)
-  const now = new Date()
-  const dayNum = props.context.state.day;
-  
-
   function capitalizeFirstLetter(text:any) {
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
 
-  return (
+  const classes = props.classes;
+  console.log(props.data);
+  if (props.data.cod === '200'){
+    const result = props.data;
+    const cityName = result.city.name
+    const country = result.city.country
+    const today = new Date(result.list[0].dt * 1000)
+    const now = new Date()
+    const dayNum = props.context.state.day;
+  
+
+    return (
+      <div>
+        <Card className={classes.card}>
+          <CardContent style={{width: '80%'}}>
+            <Typography variant="display3"   >
+              {`${cityName}, ${country}`}
+            </Typography>
+            <Typography variant="display1"  >
+              {`${today.toDateString()}, ${now.toLocaleTimeString()}`}
+            </Typography>
+                  <Typography variant="display1"  >
+                    {capitalizeFirstLetter(result.list[dayNum].weather[0].description)}
+                  </Typography>
+                  <div className={classes.flex}>
+                    <CurrentWeather data={result.list[dayNum]} />
+                    <WeatherDetails data={result.list[dayNum]} />
+                  </div>
+            <div>
+              <WeeklyWeather data={result.list} context={props.context}/>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  } else {
+    return(
     <div>
       <Card className={classes.card}>
         <CardContent style={{width: '80%'}}>
-          <Typography variant="display3"   >
-            {`${cityName}, ${country}`}
-          </Typography>
-          <Typography variant="display1"  >
-            {`${today.toDateString()}, ${now.toLocaleTimeString()}`}
-          </Typography>
-                <Typography variant="display1"  >
-                  {capitalizeFirstLetter(result.list[dayNum].weather[0].description)}
-                </Typography>
-                <div className={classes.flex}>
-                  <CurrentWeather data={result.list[dayNum]} />
-                  <WeatherDetails data={result.list[dayNum]} />
-                </div>
-          <div>
-            <WeeklyWeather data={result.list} context={props.context}/>
-          </div>
+            <Typography variant="display3">
+              City not found
+            </Typography>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>)
+  }
 }
 
 export default withStyles(styleSheet)(SimpleCard);

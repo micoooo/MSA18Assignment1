@@ -4,6 +4,7 @@ import AppBar from './components/AppBar'
 import FloatingActionButton from './components/FloatingActionButton'
 import WeatherCard from './components/WeatherCard'
 import dayContext from './components/day-context'
+import Searchbar from './components/Searchbar';
 
 interface IState {
   loading: any,
@@ -40,6 +41,7 @@ class App extends React.Component<{}, IState> {
     return (
       <div>
         <AppBar />
+        <Searchbar />
         <div>
           {
             (this.state.loading)

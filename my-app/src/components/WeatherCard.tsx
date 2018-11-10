@@ -12,7 +12,7 @@ import { runInThisContext } from 'vm';
 const styleSheet = (theme: any) => createStyles(({
   card: {
     minWidth: 275,
-    marginBottom: 16,
+    marginBottom: 16
   },
   bullet: {
     display: 'inline-block',
@@ -51,7 +51,7 @@ function SimpleCard(props: any) {
   return (
     <div>
       <Card className={classes.card}>
-        <CardContent>
+        <CardContent style={{width: '80%'}}>
           <Typography variant="display3"   >
             {`${cityName}, ${country}`}
           </Typography>

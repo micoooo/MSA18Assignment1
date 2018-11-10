@@ -7,6 +7,7 @@ import CurrentWeather from './CurrentWeather'
 import WeatherDetails from './WeatherDetails'
 import WeeklyWeather from './WeeklyWeather'
 import dayContext from './day-context'
+import { runInThisContext } from 'vm';
 
 const styleSheet = (theme: any) => createStyles(({
   card: {
@@ -35,19 +36,23 @@ const styleSheet = (theme: any) => createStyles(({
 
 function SimpleCard(props: any) {
   const classes = props.classes;
-  const result = props.data
+  const result = props.data;
   const cityName = result.city.name
   const country = result.city.country
   const today = new Date(result.list[0].dt * 1000)
   const now = new Date()
+  let dayNum = props.context.state.day;
   
 
   function capitalizeFirstLetter(text:any) {
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
 
-  function HandleClick(){
-    return;
+  function HandleClick(i:any){
+    console.log(i);
+    dayNum = i;
+    props.context.setState({ day: i });
+    props.onClick(i);
   }
 
 
@@ -61,21 +66,15 @@ function SimpleCard(props: any) {
           <Typography variant="display1"  >
             {`${today.toDateString()}, ${now.toLocaleTimeString()}`}
           </Typography>
-          <dayContext.Consumer>
-            {day => (
-              <div>
                 <Typography variant="display1"  >
-                  {capitalizeFirstLetter(result.list[day.day].weather[0].description)}
+                  {capitalizeFirstLetter(result.list[dayNum].weather[0].description)}
                 </Typography>
                 <div className={classes.flex}>
-                  <CurrentWeather data={result.list[day.day]} />
-                  <WeatherDetails data={result.list[day.day]} />
+                  <CurrentWeather data={result.list[dayNum]} />
+                  <WeatherDetails data={result.list[dayNum]} />
                 </div>
-              </div>
-            )}
-          </dayContext.Consumer>
           <div>
-            <WeeklyWeather data={result.list} />
+            <WeeklyWeather data={result.list} context={props.this} onClick={HandleClick}/>
           </div>
         </CardContent>
       </Card>

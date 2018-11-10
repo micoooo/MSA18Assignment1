@@ -7,7 +7,8 @@ import dayContext from './components/day-context'
 
 interface IState {
   loading: any,
-  weather: any
+  weather: any,
+  day: any
 }
 
 class App extends React.Component<{}, IState> {
@@ -15,7 +16,8 @@ class App extends React.Component<{}, IState> {
     super(props)
     this.state = {
       weather: [],
-      loading: true
+      loading: true,
+      day: 0
     }
   }
 
@@ -26,6 +28,8 @@ class App extends React.Component<{}, IState> {
           weather: response.data,
           loading: false
         })
+        
+        console.log(this)
       })
       .catch(error => {
         console.log('Error fetching and parsing data', error)
@@ -41,13 +45,17 @@ class App extends React.Component<{}, IState> {
             (this.state.loading)
               ? <p>Loading . . . </p>
               : 
-              <dayContext.Provider value={{day: 1}}>
-                <WeatherCard data={this.state.weather} />
-              </dayContext.Provider>
+              <WeatherCard data={this.state.weather} onClick={this.onClickHandler} context={this}/>
           }
         </div>
       </div>
     );
+  }
+
+  private onClickHandler(i: any){
+    console.log(this);
+    this.context.setState({ day: i });
+    this.context.componentDidMount();
   }
 }
 

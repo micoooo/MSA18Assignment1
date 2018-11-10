@@ -53,9 +53,13 @@ function DailyWeather(props: any) {
     default:
       weatherIcon = defaultIcon
   }
+  
+  function Warning(){
+    window.alert(5 + 6);
+  }
 
   return (
-    <div>
+    <div onClick={Warning} style={{cursor: 'pointer'}}>
       <div>
         <Typography variant="display1">
           {weekday[date.getDay()]}

@@ -12,7 +12,7 @@ export default class Searchbar extends React.Component<any, IState>{
     constructor(props: any){
         super(props);
         this.state = {
-            city: "hello"
+            city: "Auckland"
         }
     }
 

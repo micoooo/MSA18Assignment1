@@ -53,7 +53,7 @@ function SimpleCard(props: any) {
     return (
       <div>
         <Card className={classes.card}>
-          <CardContent style={{width: '80%'}}>
+          <CardContent>
             <Typography variant="display3"   >
               {`${cityName}, ${country}`}
             </Typography>
@@ -78,7 +78,7 @@ function SimpleCard(props: any) {
     return(
     <div>
       <Card className={classes.card}>
-        <CardContent style={{width: '80%'}}>
+        <CardContent>
             <Typography variant="display3">
               City not found
             </Typography>

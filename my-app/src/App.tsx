@@ -63,7 +63,7 @@ class App extends React.Component<{}, IState> {
         <div>
           {
             (this.state.loading)
-              ? <p>Loading . . . </p>
+              ? <br/>
               : 
               <WeatherCard data={this.state.weather} context={this}/>
           }

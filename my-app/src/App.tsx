@@ -45,17 +45,11 @@ class App extends React.Component<{}, IState> {
             (this.state.loading)
               ? <p>Loading . . . </p>
               : 
-              <WeatherCard data={this.state.weather} onClick={this.onClickHandler} context={this}/>
+              <WeatherCard data={this.state.weather} context={this}/>
           }
         </div>
       </div>
     );
-  }
-
-  private onClickHandler(i: any){
-    console.log(this);
-    this.context.setState({ day: i });
-    this.context.componentDidMount();
   }
 }
 

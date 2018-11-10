@@ -41,20 +41,12 @@ function SimpleCard(props: any) {
   const country = result.city.country
   const today = new Date(result.list[0].dt * 1000)
   const now = new Date()
-  let dayNum = props.context.state.day;
+  const dayNum = props.context.state.day;
   
 
   function capitalizeFirstLetter(text:any) {
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
-
-  function HandleClick(i:any){
-    console.log(i);
-    dayNum = i;
-    props.context.setState({ day: i });
-    props.onClick(i);
-  }
-
 
   return (
     <div>
@@ -74,7 +66,7 @@ function SimpleCard(props: any) {
                   <WeatherDetails data={result.list[dayNum]} />
                 </div>
           <div>
-            <WeeklyWeather data={result.list} context={props.this} onClick={HandleClick}/>
+            <WeeklyWeather data={result.list} context={props.context}/>
           </div>
         </CardContent>
       </Card>

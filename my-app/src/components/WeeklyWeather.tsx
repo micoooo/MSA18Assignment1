@@ -15,16 +15,11 @@ function WeeklyWeather(props:any) {
   const result = props.data;
   let days
 
-  function onClickHandler(i:any ){
-    console.log(i)
-    props.onClick(i);
-  }
-
 /* //Remove shift 
   result.shift() */
 
   days = result.map((day:any, i:number) =>
-    <DailyWeather data={day} key={day.dt} onClick={onClickHandler} context={props.this} num={i}/>
+    <DailyWeather data={day} key={day.dt} context={props.context} num={i}/>
   )
 
   return (

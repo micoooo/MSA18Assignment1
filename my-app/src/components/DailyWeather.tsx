@@ -57,7 +57,7 @@ function DailyWeather(props: any) {
 
   function Warning(){
     console.log(props.num);
-    props.onClick(props.num);
+    props.context.setState({ day: props.num });
   }
   
 

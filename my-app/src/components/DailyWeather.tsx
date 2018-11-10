@@ -10,6 +10,7 @@ import clear from '../images/Clear.png'
 import clouds from '../images/Cloudy.png'
 import extreme from '../images/Extreme.png'
 import defaultIcon from '../images/Partly-cloudy.png'
+import { dayContext } from './day-context';
 
 const styleSheet = createStyles({
 

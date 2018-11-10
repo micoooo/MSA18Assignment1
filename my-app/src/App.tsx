@@ -3,6 +3,7 @@ import axios from 'axios'
 import AppBar from './components/AppBar'
 import FloatingActionButton from './components/FloatingActionButton'
 import WeatherCard from './components/WeatherCard'
+import dayContext from './components/day-context'
 
 interface IState {
   loading: any,
@@ -10,7 +11,6 @@ interface IState {
 }
 
 class App extends React.Component<{}, IState> {
-
   constructor(props:any) {
     super(props)
     this.state = {
@@ -40,7 +40,10 @@ class App extends React.Component<{}, IState> {
           {
             (this.state.loading)
               ? <p>Loading . . . </p>
-              : <WeatherCard data={this.state.weather} />
+              : 
+              <dayContext.Provider value={{day: 1}}>
+                <WeatherCard data={this.state.weather} />
+              </dayContext.Provider>
           }
         </div>
       </div>

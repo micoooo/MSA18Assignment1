@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import CurrentWeather from './CurrentWeather'
 import WeatherDetails from './WeatherDetails'
 import WeeklyWeather from './WeeklyWeather'
+import dayContext from './day-context'
 
 const styleSheet = (theme: any) => createStyles(({
   card: {
@@ -32,37 +33,47 @@ const styleSheet = (theme: any) => createStyles(({
   },
 }));
 
-function SimpleCard(props:any) {
+function SimpleCard(props: any) {
   const classes = props.classes;
   const result = props.data
   const cityName = result.city.name
   const country = result.city.country
   const today = new Date(result.list[0].dt * 1000)
-  const weatherDescription = capitalizeFirstLetter(result.list[0].weather[0].description)
   const now = new Date()
+  
 
   function capitalizeFirstLetter(text:any) {
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
 
+  function HandleClick(){
+    return;
+  }
+
+
   return (
     <div>
       <Card className={classes.card}>
         <CardContent>
-
           <Typography variant="display3"   >
             {`${cityName}, ${country}`}
           </Typography>
           <Typography variant="display1"  >
             {`${today.toDateString()}, ${now.toLocaleTimeString()}`}
           </Typography>
-          <Typography variant="display1"  >
-            {weatherDescription}
-          </Typography>
-          <div className={classes.flex}>
-            <CurrentWeather data={result.list[0]} />
-            <WeatherDetails data={result.list[0]} />
-          </div>
+          <dayContext.Consumer>
+            {day => (
+              <div>
+                <Typography variant="display1"  >
+                  {capitalizeFirstLetter(result.list[day.day].weather[0].description)}
+                </Typography>
+                <div className={classes.flex}>
+                  <CurrentWeather data={result.list[day.day]} />
+                  <WeatherDetails data={result.list[day.day]} />
+                </div>
+              </div>
+            )}
+          </dayContext.Consumer>
           <div>
             <WeeklyWeather data={result.list} />
           </div>

@@ -9,8 +9,7 @@ import MenuIcon from '@material-ui/icons/Add';
 
 const styleSheet = createStyles({
   root: {
-    width: '100%',
-    marginBottom: 16,
+    width: '100%'
   },
   flex: {
     flexGrow: 1,

@@ -10,6 +10,7 @@ import clear from '../images/Clear.png'
 import clouds from '../images/Cloudy.png'
 import extreme from '../images/Extreme.png'
 import defaultIcon from '../images/Partly-cloudy.png'
+import { dayContext } from './day-context';
 
 const styleSheet = createStyles({
 
@@ -17,13 +18,13 @@ const styleSheet = createStyles({
 
 function DailyWeather(props: any) {
   const result = props.data
+  
   const date = new Date(result.dt * 1000)
   const weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   const weather = result.weather[0].main
   let weatherIcon
   const maxTemp = Math.round(result.temp.max)
   const minTemp = Math.round(result.temp.min)
-
 
   switch (weather) {
     case 'Thunderstorm':
@@ -54,8 +55,14 @@ function DailyWeather(props: any) {
       weatherIcon = defaultIcon
   }
 
+  function Warning(){
+    console.log(props.num);
+    props.context.setState({ day: props.num });
+  }
+  
+
   return (
-    <div>
+    <div onClick={Warning} style={{cursor: 'pointer'}}>
       <div>
         <Typography variant="display1">
           {weekday[date.getDay()]}

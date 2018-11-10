@@ -12,12 +12,14 @@ const styleSheet = (theme: any) => createStyles(({
 
 function WeeklyWeather(props:any) {
   const classes = props.classes;
-  const result = props.data
+  const result = props.data;
   let days
-  result.shift()
 
-  days = result.map((day:any) =>
-    <DailyWeather data={day} key={day.dt} />
+/* //Remove shift 
+  result.shift() */
+
+  days = result.map((day:any, i:number) =>
+    <DailyWeather data={day} key={day.dt} context={props.context} num={i}/>
   )
 
   return (
